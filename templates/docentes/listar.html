@@ -1,0 +1,66 @@
+
+{% extends "base.html" %}
+
+{% block title %}Docentes{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between mb-3">
+        <h2>Gestión de docentes</h2>
+        <a href="{{ url_for('docentes.nuevo') }}"
+           class="btn btn-primary">Nuevo docente</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Cédula</th>
+                    <th>Apellidos y nombres</th>
+                    <th>Correo</th>
+                    <th>Especialidad</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in docentes %}
+                <tr>
+                    <td>{{ d.id_docente }}</td>
+                    <td>{{ d.cedula }}</td>
+                    <td>{{ d.apellido }}, {{ d.nombre }}</td>
+                    <td>{{ d.correo }}</td>
+                    <td>{{ d.especialidad or '-' }}</td>
+                    <td>{{ d.estado }}</td>
+                    <td>
+                        <a class="btn btn-sm btn-warning"
+                           href="{{ url_for(
+                               'docentes.editar', id=d.id_docente
+                           ) }}">Editar</a>
+
+                        <form method="POST"
+                              action="{{ url_for(
+                                  'docentes.eliminar', id=d.id_docente
+                              ) }}"
+                              class="d-inline"
+                              onsubmit="return confirm(
+                                  '¿Deseas eliminar este docente?'
+                              )">
+                            <button class="btn btn-sm btn-danger"
+                                    type="submit">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7" class="text-center">
+                        No hay docentes registrados.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

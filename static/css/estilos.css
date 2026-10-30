@@ -1,0 +1,530 @@
+
+/* ========================================
+   1. VARIABLES Y CONFIGURACION GENERAL
+======================================== */
+
+:root {
+    --azul-oscuro: #17365d;
+    --azul-principal: #2457a7;
+    --azul-hover: #194681;
+    --azul-claro: #eaf1fb;
+    --fondo: #f4f7fb;
+    --blanco: #ffffff;
+    --texto: #263449;
+    --texto-secundario: #738096;
+    --borde: #e1e7ef;
+    --verde: #198754;
+    --rojo: #dc3545;
+    --amarillo: #ffc107;
+    --radio: 12px;
+    --sombra: 0 4px 18px rgba(23, 54, 93, 0.07);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: var(--fondo);
+    color: var(--texto);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5 {
+    color: var(--azul-oscuro);
+    font-weight: 700;
+}
+
+a {
+    text-decoration: none;
+}
+
+.contenedor {
+    width: 100%;
+    max-width: 1400px;
+    margin: 35px auto;
+    padding: 0 24px;
+}
+
+
+/* ========================================
+   2. BARRA DE NAVEGACION
+======================================== */
+
+.navbar {
+    background: linear-gradient(
+        110deg,
+        var(--azul-oscuro),
+        var(--azul-principal)
+    );
+    padding: 14px 0;
+    box-shadow: 0 3px 12px rgba(23, 54, 93, 0.15);
+}
+
+.navbar .container {
+    max-width: 1400px;
+}
+
+.navbar-brand {
+    color: var(--blanco) !important;
+    font-size: 1.2rem;
+    font-weight: 750;
+    letter-spacing: 0.2px;
+}
+
+.navbar-brand:hover {
+    opacity: 0.9;
+}
+
+.navbar .nav-link {
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-weight: 500;
+    padding: 9px 14px !important;
+    border-radius: 7px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.navbar .nav-link:hover {
+    color: var(--blanco) !important;
+    background: rgba(255, 255, 255, 0.13);
+}
+
+.navbar-toggler {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+
+/* ========================================
+   3. ENCABEZADOS Y TEXTOS
+======================================== */
+
+h2 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+.text-muted {
+    color: var(--texto-secundario) !important;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 25px;
+}
+
+
+/* ========================================
+   4. TARJETAS
+======================================== */
+
+.card {
+    background-color: var(--blanco);
+    border: 1px solid rgba(225, 231, 239, 0.8);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    overflow: hidden;
+}
+
+.card-body {
+    padding: 24px;
+}
+
+.card .card-title {
+    color: var(--azul-oscuro);
+    font-weight: 700;
+}
+
+
+/* ========================================
+   5. TABLAS
+======================================== */
+
+.table-responsive {
+    border-radius: 8px;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 0;
+    vertical-align: middle;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table thead th {
+    background-color: var(--azul-oscuro);
+    color: var(--blanco);
+    border: none;
+    padding: 15px 13px;
+    font-size: 0.83rem;
+    font-weight: 650;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    white-space: nowrap;
+}
+
+.table thead th:first-child {
+    border-top-left-radius: 7px;
+}
+
+.table thead th:last-child {
+    border-top-right-radius: 7px;
+}
+
+.table tbody td {
+    padding: 14px 13px;
+    border-bottom: 1px solid var(--borde);
+    color: var(--texto);
+}
+
+.table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover td {
+    background-color: #f1f6fd;
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.table tbody td:first-child {
+    font-weight: 600;
+    color: var(--azul-principal);
+}
+
+.table .text-center {
+    color: var(--texto-secundario);
+}
+
+
+/* ========================================
+   6. BOTONES
+======================================== */
+
+.btn {
+    border-radius: 7px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 9px 16px;
+    transition:
+        background-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background-color: var(--azul-principal);
+    border-color: var(--azul-principal);
+}
+
+.btn-primary:hover {
+    background-color: var(--azul-hover);
+    border-color: var(--azul-hover);
+    box-shadow: 0 4px 10px rgba(36, 87, 167, 0.2);
+}
+
+.btn-success {
+    background-color: var(--verde);
+    border-color: var(--verde);
+}
+
+.btn-warning {
+    color: #332800;
+}
+
+.btn-danger:hover {
+    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.18);
+}
+
+.btn-info {
+    background-color: #168ba5;
+    border-color: #168ba5;
+    color: var(--blanco);
+}
+
+.btn-info:hover {
+    background-color: #11758c;
+    border-color: #11758c;
+    color: var(--blanco);
+}
+
+.btn-outline-secondary {
+    border-color: #cbd4df;
+    color: #596579;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #e9eef4;
+    border-color: #cbd4df;
+    color: var(--azul-oscuro);
+}
+
+.btn-sm {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+}
+
+
+/* ========================================
+   7. FORMULARIOS
+======================================== */
+
+.form-label {
+    display: block;
+    color: var(--texto);
+    font-weight: 650;
+    font-size: 0.9rem;
+    margin-bottom: 7px;
+}
+
+.form-control,
+.form-select {
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid #d7dfeb;
+    border-radius: 7px;
+    color: var(--texto);
+    background-color: var(--blanco);
+    font-size: 0.93rem;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.form-control::placeholder {
+    color: #a0aaba;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--azul-principal);
+    box-shadow: 0 0 0 3px rgba(36, 87, 167, 0.12);
+    outline: none;
+}
+
+textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+}
+
+form .mb-3 {
+    margin-bottom: 20px !important;
+}
+
+
+/* ========================================
+   8. ESTADOS Y ETIQUETAS
+======================================== */
+
+.badge {
+    padding: 7px 11px;
+    border-radius: 20px;
+    font-size: 0.76rem;
+    font-weight: 650;
+    letter-spacing: 0.2px;
+}
+
+.badge.bg-success {
+    background-color: #d8f3e4 !important;
+    color: #146c43;
+}
+
+.badge.bg-secondary {
+    background-color: #e8edf3 !important;
+    color: #566273;
+}
+
+
+/* ========================================
+   9. MENSAJES DEL SISTEMA
+======================================== */
+
+.alert {
+    padding: 14px 18px;
+    border: none;
+    border-radius: 9px;
+    margin-bottom: 22px;
+}
+
+.alert-success {
+    background-color: #dff5e8;
+    color: #17643b;
+}
+
+.alert-danger {
+    background-color: #fde5e7;
+    color: #982d38;
+}
+
+.alert-warning {
+    background-color: #fff2cc;
+    color: #77580a;
+}
+
+.alert-info {
+    background-color: #dff4fa;
+    color: #14566a;
+}
+
+
+/* ========================================
+   10. DETALLE DEL DOCENTE
+======================================== */
+
+dl.row {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+dl dt {
+    color: var(--azul-oscuro);
+    font-weight: 650;
+    padding-top: 9px;
+    padding-bottom: 9px;
+}
+
+dl dd {
+    color: #4c596d;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    overflow-wrap: anywhere;
+}
+
+hr {
+    border-color: var(--borde);
+    opacity: 1;
+    margin: 22px 0;
+}
+
+
+/* ========================================
+   11. PIE DE PAGINA
+======================================== */
+
+footer {
+    color: var(--texto-secundario);
+    font-size: 0.85rem;
+    padding: 22px 12px;
+}
+
+
+/* ========================================
+   12. ACCESIBILIDAD
+======================================== */
+
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid #80b5ff;
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+
+
+/* ========================================
+   13. DISEÑO RESPONSIVO
+======================================== */
+
+@media (max-width: 992px) {
+    .contenedor {
+        margin-top: 25px;
+        padding: 0 18px;
+    }
+
+    .table thead th,
+    .table tbody td {
+        padding: 11px 10px;
+    }
+
+    .navbar .nav-link {
+        margin-top: 4px;
+    }
+}
+
+@media (max-width: 768px) {
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .contenedor {
+        margin-top: 20px;
+        padding: 0 12px;
+    }
+
+    .card-body {
+        padding: 18px;
+    }
+
+    .page-header {
+        align-items: stretch;
+    }
+
+    .page-header .btn {
+        width: 100%;
+    }
+
+    .table {
+        font-size: 0.86rem;
+    }
+
+    .table thead th {
+        font-size: 0.75rem;
+    }
+
+    .table tbody td {
+        padding: 10px 9px;
+    }
+
+    .table td .d-flex {
+        flex-wrap: wrap;
+    }
+
+    .table td form {
+        margin: 0;
+    }
+
+    dl dt,
+    dl dd {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar-brand {
+        font-size: 1rem;
+    }
+
+    .card-body {
+        padding: 14px;
+    }
+
+    .btn {
+        padding: 8px 12px;
+    }
+
+    .d-flex.gap-2 {
+        flex-wrap: wrap;
+    }
+}

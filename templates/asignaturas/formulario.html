@@ -1,0 +1,55 @@
+
+{% extends "base.html" %}
+
+{% block title %}
+{{ 'Editar asignatura' if asignatura else 'Nueva asignatura' }}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ 'Editar asignatura' if asignatura else 'Registrar asignatura' }}</h2>
+
+    <form method="POST">
+        <div class="mb-3">
+            <label class="form-label" for="nombre">Nombre</label>
+            <input class="form-control" id="nombre" name="nombre"
+                   maxlength="100" required
+                   value="{{ request.form.get('nombre', asignatura.nombre if asignatura else '') }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="descripcion">Descripción</label>
+            <input class="form-control" id="descripcion"
+                   name="descripcion" maxlength="255"
+                   value="{{ request.form.get('descripcion', asignatura.descripcion if asignatura else '') }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="nivel">Nivel</label>
+            <input class="form-control" id="nivel" name="nivel"
+                   maxlength="50"
+                   value="{{ request.form.get('nivel', asignatura.nivel if asignatura else '') }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="id_docente">Docente</label>
+            {% set docente_actual = request.form.get('id_docente', asignatura.id_docente if asignatura else '') %}
+            <select class="form-select" id="id_docente"
+                    name="id_docente" required>
+                <option value="">Seleccione un docente</option>
+                {% for d in docentes %}
+                <option value="{{ d.id_docente }}"
+                    {% if docente_actual|string == d.id_docente|string %}selected{% endif %}>
+                    {{ d.apellido }}, {{ d.nombre }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button class="btn btn-success" type="submit">Guardar</button>
+        <a href="{{ url_for('asignaturas.listar') }}"
+           class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
+

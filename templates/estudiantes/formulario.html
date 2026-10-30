@@ -1,0 +1,70 @@
+
+{% extends "base.html" %}
+
+{% block title %}
+{{ 'Editar estudiante' if estudiante else 'Nuevo estudiante' }}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ 'Editar estudiante' if estudiante else 'Registrar estudiante' }}</h2>
+
+    <form method="POST">
+        <div class="mb-3">
+            <label class="form-label" for="cedula">Cédula</label>
+            <input class="form-control" id="cedula" name="cedula"
+                   maxlength="20" required
+                   value="{{ request.form.get('cedula', estudiante.cedula if estudiante else '') }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="nombre">Nombre</label>
+            <input class="form-control" id="nombre" name="nombre"
+                   maxlength="100" required
+                   value="{{ request.form.get('nombre', estudiante.nombre if estudiante else '') }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="apellido">Apellido</label>
+            <input class="form-control" id="apellido" name="apellido"
+                   maxlength="100" required
+                   value="{{ request.form.get('apellido', estudiante.apellido if estudiante else '') }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="correo">Correo</label>
+            <input type="email" class="form-control" id="correo"
+                   name="correo" maxlength="120" required
+                   value="{{ request.form.get('correo', estudiante.correo if estudiante else '') }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="fecha_nacimiento">
+                Fecha de nacimiento
+            </label>
+            <input type="date" class="form-control"
+                   id="fecha_nacimiento" name="fecha_nacimiento"
+                   value="{{ request.form.get('fecha_nacimiento', estudiante.fecha_nacimiento.isoformat() if estudiante and estudiante.fecha_nacimiento else '') }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="estado">Estado</label>
+            {% set estado_actual = request.form.get('estado', estudiante.estado if estudiante else 'Activo') %}
+            <select class="form-select" name="estado" id="estado" required>
+                <option value="Activo"
+                        {% if estado_actual == 'Activo' %}selected{% endif %}>
+                    Activo
+                </option>
+                <option value="Inactivo"
+                        {% if estado_actual == 'Inactivo' %}selected{% endif %}>
+                    Inactivo
+                </option>
+            </select>
+        </div>
+
+        <button class="btn btn-success" type="submit">Guardar</button>
+        <a href="{{ url_for('estudiantes.listar') }}"
+           class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

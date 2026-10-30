@@ -1,0 +1,71 @@
+
+{% extends "base.html" %}
+
+{% block title %}Asignaturas{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between mb-3">
+        <h2>Gestión de asignaturas</h2>
+
+        <a href="{{ url_for('asignaturas.nueva') }}"
+           class="btn btn-primary">
+            Nueva asignatura
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Nivel</th>
+                    <th>Docente</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for a in asignaturas %}
+                <tr>
+                    <td>{{ a.id_asignatura }}</td>
+                    <td>{{ a.nombre }}</td>
+                    <td>{{ a.descripcion or '-' }}</td>
+                    <td>{{ a.nivel or '-' }}</td>
+                    <td>
+                        {{ a.nombre_docente }}
+                        {{ a.apellido_docente }}
+                    </td>
+                    <td>
+                        <a href="{{ url_for(
+                            'asignaturas.editar',
+                            id=a.id_asignatura
+                        ) }}" class="btn btn-sm btn-warning">
+                            Editar
+                        </a>
+
+                        
+                        <form method="POST"
+                            action="{{ url_for('asignaturas.eliminar', id=a.id_asignatura) }}"
+                            class="d-inline"
+                            onsubmit="return confirm('Se eliminarán también las notas de esta asignatura. ¿Continuar?')">
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                Eliminar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6" class="text-center">
+                        No hay asignaturas registradas.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

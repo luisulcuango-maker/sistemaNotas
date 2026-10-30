@@ -1,0 +1,82 @@
+
+{% extends "base.html" %}
+
+{% block title %}
+{{ 'Editar notas' if nota else 'Registrar notas' }}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ 'Editar notas' if nota else 'Registrar notas' }}</h2>
+
+    <form method="POST">
+        {% if nota %}
+        <div class="mb-3">
+            <label class="form-label">Estudiante ID</label>
+            <input class="form-control"
+                   value="{{ nota.id_estudiante }}" disabled>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Asignatura ID</label>
+            <input class="form-control"
+                   value="{{ nota.id_asignatura }}" disabled>
+        </div>
+        {% else %}
+        <div class="mb-3">
+            <label class="form-label" for="id_estudiante">Estudiante</label>
+            <select class="form-select" name="id_estudiante"
+                    id="id_estudiante" required>
+                <option value="">Seleccione un estudiante</option>
+                {% for e in estudiantes %}
+                <option value="{{ e.id_estudiante }}">
+                    {{ e.apellido }}, {{ e.nombre }} ({{ e.cedula }})
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="id_asignatura">Asignatura</label>
+            <select class="form-select" name="id_asignatura"
+                    id="id_asignatura" required>
+                <option value="">Seleccione una asignatura</option>
+                {% for a in asignaturas %}
+                <option value="{{ a.id_asignatura }}">
+                    {{ a.nombre }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        {% endif %}
+
+        {% for campo in ['nota1', 'nota2', 'examen'] %}
+        <div class="mb-3">
+            <label class="form-label" for="{{ campo }}">
+                {{ campo|capitalize }}
+            </label>
+            <input type="number" class="form-control"
+                   id="{{ campo }}" name="{{ campo }}"
+                   min="0" max="10" step="0.01" required
+                   value="{{ request.form.get(campo, nota[campo] if nota else '') }}">
+        </div>
+        {% endfor %}
+
+        <div class="mb-3">
+            <label class="form-label" for="observacion">
+                Observación
+            </label>
+            <textarea class="form-control" id="observacion"
+                      name="observacion" maxlength="255">{{ request.form.get('observacion', nota.observacion if nota else '') }}</textarea>
+        </div>
+
+        {% if nota %}
+        <p>Promedio actual: <strong>{{ "%.2f"|format(nota.promedio) }}</strong></p>
+        {% endif %}
+
+        <button class="btn btn-success" type="submit">Guardar</button>
+        <a href="{{ url_for('notas.listar') }}"
+           class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

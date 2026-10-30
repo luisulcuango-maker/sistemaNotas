@@ -1,0 +1,86 @@
+
+{% extends "base.html" %}
+
+{% block title %}Registro de notas{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between mb-3">
+        <h2>Registro de notas</h2>
+
+        <a href="{{ url_for('notas.nueva') }}"
+           class="btn btn-primary">
+            Registrar notas
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Estudiante</th>
+                    <th>Cédula</th>
+                    <th>Asignatura</th>
+                    <th>Nota 1</th>
+                    <th>Nota 2</th>
+                    <th>Examen</th>
+                    <th>Promedio</th>
+                    <th>Observación</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for n in notas %}
+                <tr>
+                    <td>
+                        {{ n.apellido_estudiante }},
+                        {{ n.nombre_estudiante }}
+                    </td>
+
+                    <td>{{ n.cedula }}</td>
+                    <td>{{ n.nombre_asignatura }}</td>
+                    <td>{{ "%.2f"|format(n.nota1) }}</td>
+                    <td>{{ "%.2f"|format(n.nota2) }}</td>
+                    <td>{{ "%.2f"|format(n.examen) }}</td>
+
+                    <td>
+                        <strong>
+                            {{ "%.2f"|format(n.promedio) }}
+                        </strong>
+                    </td>
+
+                    <td>{{ n.observacion or '-' }}</td>
+
+                    <td>
+                        <a href="{{ url_for(
+                            'notas.editar',
+                            id=n.id_nota
+                        ) }}" class="btn btn-sm btn-warning">
+                            Editar
+                        </a>
+
+                        
+                        <form method="POST"
+                            action="{{ url_for('notas.eliminar', id=n.id_nota) }}"
+                            class="d-inline"
+                            onsubmit="return confirm('¿Deseas eliminar esta nota?')">
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                Eliminar
+                            </button>
+                        </form>
+
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="9" class="text-center">
+                        No hay notas registradas.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

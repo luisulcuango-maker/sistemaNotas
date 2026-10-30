@@ -1,0 +1,68 @@
+
+{% extends "base.html" %}
+
+{% block title %}
+{{ 'Editar docente' if docente else 'Nuevo docente' }}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ 'Editar docente' if docente else 'Registrar docente' }}</h2>
+
+    <form method="POST">
+        <div class="mb-3">
+            <label class="form-label" for="cedula">Cédula</label>
+            <input class="form-control" id="cedula" name="cedula"
+                   maxlength="20" required
+                   value="{{ request.form.get('cedula', docente.cedula if docente else '') }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="nombre">Nombre</label>
+            <input class="form-control" id="nombre" name="nombre"
+                   maxlength="100" required
+                   value="{{ request.form.get('nombre', docente.nombre if docente else '') }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="apellido">Apellido</label>
+            <input class="form-control" id="apellido" name="apellido"
+                   maxlength="100" required
+                   value="{{ request.form.get('apellido', docente.apellido if docente else '') }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="correo">Correo</label>
+            <input type="email" class="form-control" id="correo"
+                   name="correo" maxlength="120" required
+                   value="{{ request.form.get('correo', docente.correo if docente else '') }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="especialidad">Especialidad</label>
+            <input class="form-control" id="especialidad"
+                   name="especialidad" maxlength="100"
+                   value="{{ request.form.get('especialidad', docente.especialidad if docente else '') }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="estado">Estado</label>
+            {% set estado_actual = request.form.get('estado', docente.estado if docente else 'Activo') %}
+            <select class="form-select" id="estado" name="estado" required>
+                <option value="Activo"
+                        {% if estado_actual == 'Activo' %}selected{% endif %}>
+                    Activo
+                </option>
+                <option value="Inactivo"
+                        {% if estado_actual == 'Inactivo' %}selected{% endif %}>
+                    Inactivo
+                </option>
+            </select>
+        </div>
+
+        <button class="btn btn-success" type="submit">Guardar</button>
+        <a href="{{ url_for('docentes.listar') }}"
+           class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
